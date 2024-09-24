@@ -1,0 +1,13 @@
+requests==2.32.3
+beautifulsoup4==4.12.3
+bs4==0.0.2
+python-dotenv
+webdriver-manager
+selenium
+google-api-python-client
+requests
+google-auth-oauthlib
+google-auth
+google-auth-httplib2
+
+
