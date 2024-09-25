@@ -69,6 +69,10 @@ def job_detail(driver, url):
         "//dt[text()='Published on']/following-sibling::dd//span[@class='sc-a6d70f3d-0 bXFXwo']",
     ).text.strip()
 
+    company_url = job_content.find_element(
+        By.CSS_SELECTOR, ".sc-4203a236-8.dJYJRF.sc-e8382fa-0.gbbLZD"
+    ).text.strip()
+
     job_desc_element = job_content.find_element(
         By.CSS_SELECTOR, "section.sc-506be909-0.sc-31104e37-3.YxBTc"
     )
@@ -77,6 +81,7 @@ def job_detail(driver, url):
         "Job_Title": job_title,
         "Apply_Link": apply_link,
         "Company_Name": company_name,
+        "Company_URL": company_url,
         "Published_On": published_on,
         "Job_Description": job_desc_text,
     }
@@ -104,6 +109,7 @@ def main():
                             "https://remote.com/",
                             job_content.get("Job_Title"),
                             job_content.get("Company_Name"),
+                            job_content.get("Company_URL"),
                             job_content.get("Apply_Link"),
                             job_content.get("Published_On"),
                             job_content.get("Job_Description").replace("\n", " "),

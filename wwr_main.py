@@ -39,6 +39,10 @@ def job_detail(link):
     response = requests.get(link)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
+    h3 = soup.find_all("h3")
+    for a_tag in h3:
+        if a_tag.get_text(strip=True) == "Website":
+            company_url = a_tag.find("a").get("href")
     job_title = soup.find("h1").get_text(strip=True)
     published_on = soup.find("time").get_text(strip=True)
     company_name = soup.find("h2").get_text(strip=True)
@@ -53,6 +57,7 @@ def job_detail(link):
         "Job_Title": job_title,
         "Apply_Link": apply_link,
         "Company_Name": company_name,
+        "Company_URL": company_url,
         "Published_On": f"{published_on}, {now.year}",
         "Job_Description": job_desc_text,
     }
@@ -67,6 +72,7 @@ def main():
                 "https://weworkremotely.com/",
                 job_content.get("Job_Title"),
                 job_content.get("Company_Name"),
+                job_content.get("Company_URL"),
                 job_content.get("Apply_Link"),
                 job_content.get("Published_On"),
                 job_content.get("Job_Description").replace("\n", " "),
