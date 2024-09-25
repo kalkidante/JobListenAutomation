@@ -101,6 +101,7 @@ def main():
                     job_content = job_detail(driver, job_link)
                     job_data.append(
                         [
+                            "https://remote.com/",
                             job_content.get("Job_Title"),
                             job_content.get("Company_Name"),
                             job_content.get("Apply_Link"),
